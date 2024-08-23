@@ -8,7 +8,6 @@ const nextConfig = {
       },
       {
         hostname: "images.pexels.com",
-        hostname: "images.pexels.com",
       },
     ],
   },
