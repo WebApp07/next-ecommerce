@@ -9,6 +9,7 @@ const nextConfig = {
       {
         hostname: "images.pexels.com",
       },
+      { hostname: "static.wixstatic.com" },
     ],
   },
 };

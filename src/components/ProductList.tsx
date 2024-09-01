@@ -1,132 +1,73 @@
 import Link from "next/link";
 import Image from "next/image";
+import { wixClientServer } from "@/lib/wixClientServer";
+import { products } from "@wix/stores";
+import DOMPurify from "isomorphic-dompurify";
 
-const ProductList = () => {
+const PRODUCT_PER_PAGE = 20;
+
+const ProductList = async ({
+  categoryId,
+  limit,
+}: {
+  categoryId: string;
+  limit?: number;
+}) => {
+  const wixClient = await wixClientServer();
+  const res = await wixClient.products
+    .queryProducts()
+    .eq("collectionIds", categoryId)
+    .limit(limit || PRODUCT_PER_PAGE)
+    .find();
+  console.log(res);
+
   return (
     <div className="mt-12 flex gap-x-8 gap-y-16 justify-between flex-wrap">
-      <Link
-        href="/test"
-        className="w-full flex flex-col gap-4 sm:w-[45%] lg:w-[22%]"
-      >
-        <div className="relative w-full h-80">
-          <Image
-            src="https://plus.unsplash.com/premium_photo-1723377620336-94bf506489dd?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHwyfHx8ZW58MHx8fHx8"
-            alt=""
-            fill
-            sizes="25vw"
-            className="absoulte object-cover rounded-md z-10 hover:opacity-0 transition-opacity easy duration-500"
-          />
-
-          <Image
-            src="https://images.pexels.com/photos/1183266/pexels-photo-1183266.jpeg?auto=compress&cs=tinysrgb&w=800"
-            alt=""
-            fill
-            sizes="25vw"
-            className="absoulte object-cover rounded-md"
-          />
-        </div>
-        <div className="flex justify-between">
-          <span className="font-medium">Product Name</span>
-          <span className="font-semibold">$49</span>
-        </div>
-        <div className="text-sm text-gray-500">My description</div>
-        <button className="rounded-2xl ring-1 ring-lama  text-lama w-max py-2 px-4 text-xs hover:bg-lama hover:text-white">
-          Add to cart
-        </button>
-      </Link>
-
-      <Link
-        href="/test"
-        className="w-full flex flex-col gap-4 sm:w-[45%] lg:w-[22%]"
-      >
-        <div className="relative w-full h-80">
-          <Image
-            src="https://plus.unsplash.com/premium_photo-1723377620336-94bf506489dd?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHwyfHx8ZW58MHx8fHx8"
-            alt=""
-            fill
-            sizes="25vw"
-            className="absoulte object-cover rounded-md z-10 hover:opacity-0 transition-opacity easy duration-500"
-          />
-
-          <Image
-            src="https://images.pexels.com/photos/1183266/pexels-photo-1183266.jpeg?auto=compress&cs=tinysrgb&w=800"
-            alt=""
-            fill
-            sizes="25vw"
-            className="absoulte object-cover rounded-md"
-          />
-        </div>
-        <div className="flex justify-between">
-          <span className="font-medium">Product Name</span>
-          <span className="font-semibold">$49</span>
-        </div>
-        <div className="text-sm text-gray-500">My description</div>
-        <button className="rounded-2xl ring-1 ring-lama  text-lama w-max py-2 px-4 text-xs hover:bg-lama hover:text-white">
-          Add to cart
-        </button>
-      </Link>
-
-      <Link
-        href="/test"
-        className="w-full flex flex-col gap-4 sm:w-[45%] lg:w-[22%]"
-      >
-        <div className="relative w-full h-80">
-          <Image
-            src="https://plus.unsplash.com/premium_photo-1723377620336-94bf506489dd?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHwyfHx8ZW58MHx8fHx8"
-            alt=""
-            fill
-            sizes="25vw"
-            className="absoulte object-cover rounded-md z-10 hover:opacity-0 transition-opacity easy duration-500"
-          />
-
-          <Image
-            src="https://images.pexels.com/photos/1183266/pexels-photo-1183266.jpeg?auto=compress&cs=tinysrgb&w=800"
-            alt=""
-            fill
-            sizes="25vw"
-            className="absoulte object-cover rounded-md"
-          />
-        </div>
-        <div className="flex justify-between">
-          <span className="font-medium">Product Name</span>
-          <span className="font-semibold">$49</span>
-        </div>
-        <div className="text-sm text-gray-500">My description</div>
-        <button className="rounded-2xl ring-1 ring-lama  text-lama w-max py-2 px-4 text-xs hover:bg-lama hover:text-white">
-          Add to cart
-        </button>
-      </Link>
-
-      <Link
-        href="/test"
-        className="w-full flex flex-col gap-4 sm:w-[45%] lg:w-[22%]"
-      >
-        <div className="relative w-full h-80">
-          <Image
-            src="https://plus.unsplash.com/premium_photo-1723377620336-94bf506489dd?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHwyfHx8ZW58MHx8fHx8"
-            alt=""
-            fill
-            sizes="25vw"
-            className="absoulte object-cover rounded-md z-10 hover:opacity-0 transition-opacity easy duration-500"
-          />
-
-          <Image
-            src="https://images.pexels.com/photos/1183266/pexels-photo-1183266.jpeg?auto=compress&cs=tinysrgb&w=800"
-            alt=""
-            fill
-            sizes="25vw"
-            className="absoulte object-cover rounded-md"
-          />
-        </div>
-        <div className="flex justify-between">
-          <span className="font-medium">Product Name</span>
-          <span className="font-semibold">$49</span>
-        </div>
-        <div className="text-sm text-gray-500">My description</div>
-        <button className="rounded-2xl ring-1 ring-lama  text-lama w-max py-2 px-4 text-xs hover:bg-lama hover:text-white">
-          Add to cart
-        </button>
-      </Link>
+      {res.items.map((product: products.Product) => (
+        <Link
+          href={"/test" + product.slug}
+          className="w-full flex flex-col gap-4 sm:w-[45%] lg:w-[22%]"
+          key={product._id}
+        >
+          <div className="relative w-full h-80">
+            <Image
+              src={product.media?.mainMedia?.image?.url || "product.png"}
+              alt=""
+              fill
+              sizes="25vw"
+              className="absoulte object-cover rounded-md z-10 hover:opacity-0 transition-opacity easy duration-500"
+            />
+            {product.media?.items && (
+              <Image
+                src={product.media?.items[1]?.image?.url || "product.png"}
+                alt=""
+                fill
+                sizes="25vw"
+                className="absoulte object-cover rounded-md"
+              />
+            )}
+          </div>
+          <div className="flex justify-between">
+            <span className="font-medium">{product.name}</span>
+            <span className="font-semibold">${product.price?.price}</span>
+          </div>
+          {product.additionalInfoSections && (
+            <div
+              className="text-sm text-gray-500"
+              dangerouslySetInnerHTML={{
+                __html: DOMPurify.sanitize(
+                  product.additionalInfoSections.find(
+                    (section: any) => section.title === "shortDesc"
+                  )?.description || ""
+                ),
+              }}
+            ></div>
+          )}
+          <button className="rounded-2xl ring-1 ring-lama  text-lama w-max py-2 px-4 text-xs hover:bg-lama hover:text-white">
+            Add to cart
+          </button>
+        </Link>
+      ))}
     </div>
   );
 };
