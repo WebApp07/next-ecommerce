@@ -5,7 +5,7 @@ import ProductList from "@/components/ProductList";
 import { wixClientServer } from "@/lib/wixClientServer";
 import Skeleton from "@/components/Skeleton";
 
-const List = async ({ searchParams }: { searchParms: any }) => {
+const List = async ({ searchParams }: { searchParams: any }) => {
   const wixClient = await wixClientServer();
   const cat = await wixClient.collections.getCollectionBySlug(
     searchParams.cat || "all-produts"
@@ -30,7 +30,9 @@ const List = async ({ searchParams }: { searchParms: any }) => {
       {/* FILTER */}
       <Filter />
       {/* PRODUCTS */}
-      <h1 className="mt-12 text-xl font-semibold">Shoes For You!</h1>
+      <h1 className="mt-12 text-xl font-semibold">
+        {cat?.collection?.name} For You!
+      </h1>
       <Suspense fallback={Skeleton()}>
         <ProductList
           categoryId={
